@@ -145,16 +145,8 @@ static void on_recv(const uint8_t *src_mac, const uint8_t *data, int len)
     }
 }
 
-/* Issue #944: ESP-IDF v6.0 changed `esp_now_send_cb_t` from
- *   void (*)(const uint8_t *mac, esp_now_send_status_t status)
- * to
- *   void (*)(const esp_now_send_info_t *tx_info, esp_now_send_status_t status)
- * Both signatures ignore the address-side argument here — we only inspect
- * `status` to bump the TX-fail counter — so the body is identical; only the
- * function-pointer type differs. ESP_IDF_VERSION_MAJOR is the canonical guard.
- */
-#if ESP_IDF_VERSION_MAJOR >= 6
-static void on_send(const esp_now_send_info_t *tx_info, esp_now_send_status_t status)
+#if ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(5, 0, 0)
+static void on_send(const void *tx_info, esp_now_send_status_t status)
 {
     (void)tx_info;
     if (status != ESP_NOW_SEND_SUCCESS) s_tx_fail++;
@@ -196,7 +188,7 @@ esp_err_t c6_sync_espnow_init(void)
         return r;
     }
     esp_now_register_recv_cb(on_recv);
-    esp_now_register_send_cb(on_send);
+    esp_now_register_send_cb((esp_now_send_cb_t)on_send);
 
     /* Add broadcast peer so esp_now_send to FF:FF:FF:FF:FF:FF works. */
     esp_now_peer_info_t peer = {0};

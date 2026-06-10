@@ -69,7 +69,7 @@ static uint32_t s_rate_skip = 0;
  * We cap the send rate to avoid exhausting lwIP packet buffers (ENOMEM).
  * Default: 20 ms = 50 Hz max send rate.
  */
-#define CSI_MIN_SEND_INTERVAL_US  (20 * 1000)
+#define CSI_MIN_SEND_INTERVAL_US  (0)
 static int64_t s_last_send_us = 0;
 
 /**
@@ -86,7 +86,7 @@ static int64_t s_last_send_us = 0;
  * but we simply discard the excess in software. This reduces the time spent
  * in callback context per second, giving the WiFi ISR more headroom.
  */
-#define CSI_MIN_PROCESS_INTERVAL_US  (20 * 1000)  /* 50 Hz */
+#define CSI_MIN_PROCESS_INTERVAL_US  (0)  /* Limite removido */
 static int64_t s_last_process_us = 0;
 static uint32_t s_early_drop = 0;
 
@@ -536,7 +536,7 @@ void csi_collector_init(void)
      * adds ~10 Hz probe responses from APs → ~20 Hz total, matching the
      * edge processing designed sample rate of 20 Hz. */
     wifi_promiscuous_filter_t filt = {
-        .filter_mask = WIFI_PROMIS_FILTER_MASK_MGMT,
+        .filter_mask = WIFI_PROMIS_FILTER_MASK_MGMT | WIFI_PROMIS_FILTER_MASK_DATA,
     };
     ESP_ERROR_CHECK(esp_wifi_set_promiscuous_filter(&filt));
 
