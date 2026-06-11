@@ -164,11 +164,6 @@ static void on_send(const esp_now_send_info_t *tx_info, esp_now_send_status_t st
     if (status != ESP_NOW_SEND_SUCCESS) s_tx_fail++;
 }
 #else
-{
-    (void)tx_info;
-    if (status != ESP_NOW_SEND_SUCCESS) s_tx_fail++;
-}
-#else
 static void on_send(const uint8_t *mac, esp_now_send_status_t status)
 {
     (void)mac;
@@ -205,7 +200,7 @@ esp_err_t c6_sync_espnow_init(void)
         return r;
     }
     esp_now_register_recv_cb(on_recv);
-    esp_now_register_send_cb((esp_now_send_cb_t)on_send);
+    esp_now_register_send_cb(on_send);
 
     /* Add broadcast peer so esp_now_send to FF:FF:FF:FF:FF:FF works. */
     esp_now_peer_info_t peer = {0};
