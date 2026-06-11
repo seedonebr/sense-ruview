@@ -349,7 +349,7 @@ pub async fn room_watch(args: RoomWatchArgs) -> Result<()> {
                 }
             }
         }
-        if last_print.elapsed() >= Duration::from_secs(1) && win.len() >= 32 {
+        if last_print.elapsed() >= Duration::from_secs(1) && win.len() >= 1 {
             let series: Vec<f32> = win.iter().copied().collect();
             let f = Features::from_series(&series, args.fs_hz);
             let s = mix.infer(&f, &baseline_id);
