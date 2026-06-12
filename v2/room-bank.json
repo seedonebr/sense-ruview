@@ -1,0 +1,241 @@
+{
+  "room_id": "default",
+  "baseline_id": "00000000-0000-0000-74f7-c9e674d71c12",
+  "fs_hz": 15.0,
+  "anchors": [
+    {
+      "room_id": "default",
+      "label": "empty",
+      "features": {
+        "mean": 0.0,
+        "variance": 0.0,
+        "motion": 0.0,
+        "breathing_score": 0.0,
+        "breathing_hz": 0.0,
+        "heart_score": 0.0,
+        "heart_hz": 0.0
+      }
+    },
+    {
+      "room_id": "default",
+      "label": "stand_still",
+      "features": {
+        "mean": 9.801636,
+        "variance": 0.015876845,
+        "motion": 0.15418053,
+        "breathing_score": 0.0,
+        "breathing_hz": 0.0,
+        "heart_score": 0.0,
+        "heart_hz": 0.0
+      }
+    },
+    {
+      "room_id": "default",
+      "label": "sit",
+      "features": {
+        "mean": 10.027032,
+        "variance": 0.0715796,
+        "motion": 0.55681086,
+        "breathing_score": 0.0,
+        "breathing_hz": 0.0,
+        "heart_score": 0.0,
+        "heart_hz": 0.0
+      }
+    },
+    {
+      "room_id": "default",
+      "label": "lie_down",
+      "features": {
+        "mean": 10.067852,
+        "variance": 0.027112123,
+        "motion": 0.3293152,
+        "breathing_score": 0.0,
+        "breathing_hz": 0.0,
+        "heart_score": 0.0,
+        "heart_hz": 0.0
+      }
+    },
+    {
+      "room_id": "default",
+      "label": "breathe_slow",
+      "features": {
+        "mean": 10.681569,
+        "variance": 0.0,
+        "motion": 0.0,
+        "breathing_score": 0.0,
+        "breathing_hz": 0.0,
+        "heart_score": 0.0,
+        "heart_hz": 0.0
+      }
+    },
+    {
+      "room_id": "default",
+      "label": "breathe_normal",
+      "features": {
+        "mean": 0.0,
+        "variance": 0.0,
+        "motion": 0.0,
+        "breathing_score": 0.0,
+        "breathing_hz": 0.0,
+        "heart_score": 0.0,
+        "heart_hz": 0.0
+      }
+    },
+    {
+      "room_id": "default",
+      "label": "small_move",
+      "features": {
+        "mean": 0.0,
+        "variance": 0.0,
+        "motion": 0.0,
+        "breathing_score": 0.0,
+        "breathing_hz": 0.0,
+        "heart_score": 0.0,
+        "heart_hz": 0.0
+      }
+    },
+    {
+      "room_id": "default",
+      "label": "sleep_posture",
+      "features": {
+        "mean": 11.201533,
+        "variance": 0.20123398,
+        "motion": 0.48998374,
+        "breathing_score": 0.0,
+        "breathing_hz": 0.0,
+        "heart_score": 0.0,
+        "heart_hz": 0.0
+      }
+    }
+  ],
+  "session": {
+    "room_id": "default",
+    "baseline_id": "00000000-0000-0000-74f7-c9e674d71c12",
+    "events": [
+      {
+        "Started": {
+          "room_id": "default",
+          "baseline_id": "00000000-0000-0000-74f7-c9e674d71c12",
+          "at": 1781209588
+        }
+      },
+      {
+        "AnchorAccepted": {
+          "anchor": {
+            "label": "empty",
+            "captured_at_unix_s": 1781209611,
+            "quality": {
+              "presence_z": 0.1,
+              "motion_rate": 0.0,
+              "frames": 0,
+              "accepted": true
+            }
+          }
+        }
+      },
+      {
+        "AnchorAccepted": {
+          "anchor": {
+            "label": "stand_still",
+            "captured_at_unix_s": 1781209634,
+            "quality": {
+              "presence_z": 2.0,
+              "motion_rate": 0.0,
+              "frames": 3,
+              "accepted": true
+            }
+          }
+        }
+      },
+      {
+        "AnchorAccepted": {
+          "anchor": {
+            "label": "sit",
+            "captured_at_unix_s": 1781209657,
+            "quality": {
+              "presence_z": 2.0,
+              "motion_rate": 0.0,
+              "frames": 3,
+              "accepted": true
+            }
+          }
+        }
+      },
+      {
+        "AnchorAccepted": {
+          "anchor": {
+            "label": "lie_down",
+            "captured_at_unix_s": 1781209681,
+            "quality": {
+              "presence_z": 2.0,
+              "motion_rate": 0.0,
+              "frames": 2,
+              "accepted": true
+            }
+          }
+        }
+      },
+      {
+        "AnchorAccepted": {
+          "anchor": {
+            "label": "breathe_slow",
+            "captured_at_unix_s": 1781209714,
+            "quality": {
+              "presence_z": 2.0,
+              "motion_rate": 0.0,
+              "frames": 1,
+              "accepted": true
+            }
+          }
+        }
+      },
+      {
+        "AnchorAccepted": {
+          "anchor": {
+            "label": "breathe_normal",
+            "captured_at_unix_s": 1781209747,
+            "quality": {
+              "presence_z": 2.0,
+              "motion_rate": 0.0,
+              "frames": 0,
+              "accepted": true
+            }
+          }
+        }
+      },
+      {
+        "AnchorAccepted": {
+          "anchor": {
+            "label": "small_move",
+            "captured_at_unix_s": 1781209770,
+            "quality": {
+              "presence_z": 2.0,
+              "motion_rate": 0.5,
+              "frames": 0,
+              "accepted": true
+            }
+          }
+        }
+      },
+      {
+        "AnchorAccepted": {
+          "anchor": {
+            "label": "sleep_posture",
+            "captured_at_unix_s": 1781209803,
+            "quality": {
+              "presence_z": 2.0,
+              "motion_rate": 0.0,
+              "frames": 6,
+              "accepted": true
+            }
+          }
+        }
+      },
+      {
+        "Completed": {
+          "at": 1781209803
+        }
+      }
+    ]
+  }
+}
