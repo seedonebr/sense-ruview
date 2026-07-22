@@ -178,13 +178,42 @@ label or behavior change, consistent with leaving their claim surface intact.)
 
 ## Deferred Backlog (Nothing Dropped)
 
-- **Per-skill accuracy validation** — **DATA-GATED**. Validating any med_*/affect/
-  sign-language claim requires labelled clinical/affective/ASL data and reference
-  standards that do not exist in this repo. The disclaimers + feature gate are the
-  honest stand-in. Nothing is claimed that is not measured.
-- **Criterion benches for `process_frame` budget claims** — **ACCEPTED-FUTURE**.
-  `tests/budget_compliance.rs` asserts L/S/H tier wall-clock budgets (25 tests,
-  passing), but a regression-grade criterion bench is not yet wired.
+- **Per-skill accuracy validation** — **PARTIALLY MEASURED-on-synthetic**
+  (2026-06-13). For the subset of skills whose detection target is *constructible*
+  with known ground truth, a synthetic-ground-truth harness
+  (`tests/synthetic_validation.rs`, 12 tests) plants signals with known answers,
+  runs the real detector, and **measures** detection accuracy / rate-error:
+  `vital_trend`, `exo_time_crystal` (periodic-vs-aperiodic — its sub-harmonic-vs-
+  clean-period claim is NOT separable, recorded honestly), `exo_ghost_hunter`
+  (hidden breathing), `occupancy`, `intrusion`, `exo_rain_detect`,
+  `sig_flash_attention` (8/8 peak localization), `spt_spiking_tracker` (4/4 zone
+  localization, sparse plant), `sig_optimal_transport`, `sig_mincut_person_match`
+  (0 id-swaps), `lrn_dtw_gesture_learn` (enrollment) — all 1.000 where claimed;
+  `sig_sparse_recovery`'s recovery accuracy is reported **negative** (−2.2% vs
+  unrecovered baseline) — only its trigger path is validated. Full numbers +
+  reproduce commands in `benchmarks/edge-skills/RESULTS.md`.
+  The **med_*/affect/sign-language/weapon** claims remain **DATA-GATED**:
+  validating them requires labelled clinical/affective/ASL/metal-object data and
+  reference standards that do not exist in this repo. Planting a "seizure-/weapon-/
+  happy-like" synthetic signal validates nothing real and is explicitly refused;
+  RESULTS.md lists each with the real data it needs. The disclaimers + feature gate
+  are the honest stand-in. Nothing is claimed that is not measured.
+- **Unified edge pipeline** — **MEASURED** (2026-06-13). `src/pipeline_all.rs`
+  (`EdgePipeline`) + `src/skill_registry.rs` register **every** runtime skill
+  behind one uniform `EdgeSkill` trait and run them all per CSI frame; `med_*` are
+  registered only under `--features medical-experimental` (preserves the §A1 gate).
+  `tests/pipeline_all.rs` (4 tests) proves all 59 default / 64 medical skills run
+  without panic over 300 synthetic frames with a well-formed aggregated event
+  stream. `examples/run_all_skills.rs` is a runnable demo. No skill DSP changed.
+- **Criterion benches for `process_frame` budget claims** — **DONE (host)**
+  (ADR-163, 2026-06-12). `benches/process_frame_bench.rs` benches the heaviest
+  hot paths (`exo_time_crystal` 256×128 autocorrelation, `exo_ghost_hunter`
+  periodicity, `sec_weapon_detect` per-subcarrier Welford, `med_seizure_detect`
+  clonic rhythm) and reports committed **host** medians
+  (`benchmarks/edge-latency/RESULTS.md`). `tests/budget_compliance.rs` continues
+  to assert the L/S/H tier wall-clock budgets (25 tests, passing). **ESP32-on-
+  hardware (Xtensa/WASM3) latency remains PENDING** — the host bench is an
+  upper-bound algorithm-cost proxy, NOT the ESP32 figure (needs hardware).
 - **`wasm32-unknown-unknown` `static_mut_refs` confirmation** — **ACCEPTED-FUTURE**
   (toolchain): the source pattern is eliminated; a CI job on the wasm target should
   assert zero `static_mut_refs` once the target is added to the build image.
